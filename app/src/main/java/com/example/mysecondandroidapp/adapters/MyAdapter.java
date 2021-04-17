@@ -49,7 +49,7 @@ public class MyAdapter extends BaseAdapter {
         if (convertView == null) {
             // Define Layout inflater and set it up
             LayoutInflater layoutInflater = LayoutInflater.from(this.context);
-            convertView = layoutInflater.inflate(R.layout.list_item, null);
+            convertView = layoutInflater.inflate(this.layout, null);
 
             holder = new ViewHolder();
 
