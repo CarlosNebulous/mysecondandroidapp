@@ -43,25 +43,40 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        // Initialize view
-        View v = convertView;
+        // View holder pattern
+        ViewHolder holder;
 
-        // Define Layout inflater and set it up
-        LayoutInflater layoutInflater = LayoutInflater.from(this.context);
-        v = layoutInflater.inflate(R.layout.list_item, null);
+        if (convertView == null) {
+            // Define Layout inflater and set it up
+            LayoutInflater layoutInflater = LayoutInflater.from(this.context);
+            convertView = layoutInflater.inflate(R.layout.list_item, null);
+
+            holder = new ViewHolder();
+
+            // Modify the holder view elements according the fruit element
+            holder.textViewFruit = convertView.findViewById(R.id.textViewFruit);
+            holder.textViewOrigin  = convertView.findViewById(R.id.textViewOrigin);
+            holder.imageViewIcon = convertView.findViewById(R.id.imageViewIcon);
+
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
 
         // Get the current fruit from the fruits list
         Fruit currentFruit = this.fruits.get(position);
 
-        // Modify the view elements according the fruit element
-        TextView textViewFruit = v.findViewById(R.id.textViewFruit);
-        TextView textViewOrigin  = v.findViewById(R.id.textViewOrigin);
-        ImageView imageViewIcon = v.findViewById(R.id.imageViewIcon);
+        holder.textViewFruit.setText(currentFruit.getName());
+        holder.textViewOrigin.setText(currentFruit.getOrigin());
+        holder.imageViewIcon.setImageResource(currentFruit.getIcon());
 
-        textViewFruit.setText(currentFruit.getName());
-        textViewOrigin.setText(currentFruit.getOrigin());
-        imageViewIcon.setImageResource(currentFruit.getIcon());
-
-        return v;
+        return convertView;
     }
+
+    static class ViewHolder {
+        private TextView textViewFruit;
+        private TextView textViewOrigin;
+        private ImageView imageViewIcon;
+    }
+
 }
