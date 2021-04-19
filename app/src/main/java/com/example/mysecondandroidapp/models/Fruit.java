@@ -8,6 +8,7 @@ public class Fruit {
     public String Origin;
     public int Icon;
     public static int Apple_icon = R.mipmap.ic_apple;
+    public static int Banana_icon = R.mipmap.ic_banana;
 
     public Fruit(String Name, String Origin, int Icon) {
         this.Name = Name;
